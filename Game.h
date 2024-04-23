@@ -35,7 +35,7 @@ class Game
     // bool setEnemy(int, Entity);
     // Entity getEnemy(string);
     int findPlayer(string);
-    // int findEnemy(string);
+    int findEnemy(string);
     void printAllStats();
     //added
     int combat(Entity player);

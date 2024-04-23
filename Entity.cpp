@@ -200,14 +200,14 @@ void Entity::setAdvantage(bool advantage)
     }
 }
 
-void Entity::setStartingItems()
+void Entity::setStartingItems(const string newStartingItems) 
 {
-
+    _starting_items = newStartingItems;
 }
 
-void Entity::setNumItems()
+void Entity::setNumItems(int newNumItems) 
 {
-
+    _num_items = newNumItems;
 }
 
 void Entity::printStats()

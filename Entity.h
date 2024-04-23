@@ -55,10 +55,10 @@ class Entity
     void setAdvantage(bool advantage);
 
     string getStartingItems();
-    void setStartingItems();
+    void setStartingItems(string newStartingItems);
 
     int getNumItems();
-    void setNumItems();
+    void setNumItems(int newNumItems);
 
     bool validateInt(string);
 

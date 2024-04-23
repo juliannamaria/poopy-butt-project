@@ -32,6 +32,63 @@ using namespace std;
 
 // }
 
+// void readCharacters(string file_name)
+// {
+//     ifstream infile(file_name);
+
+//     if (infile.fail())
+//     {
+//         cout << "Failed to open file" << endl;
+//     }
+//     cout << "-----------------------------------------------" << endl;
+//     cout << "WELCOME TO CANDYLAND!!!! Here is the list of characters a player can select from: " << endl;
+//     cout << "-----------------------------------------------" << endl;
+
+//     string line;
+//     string candiesString;
+//     while (getline(infile, line)) 
+//     {
+//         if (line.empty()) 
+//         {
+//             continue;
+//         }
+//         stringstream ss(line);
+//         Character characters_object;
+
+//         getline(ss, characters_object.name, '|');
+//         getline(ss, characters_object.stamina, '|');
+//         getline(ss, characters_object.gold, '|');
+
+//         cout << "Name: " << characters_object.name << endl;
+//         cout << "Stamina: " << characters_object.stamina << endl;
+//         cout << "Gold: " << characters_object.gold << endl;
+//         cout << "Candies: " << endl;
+//         getline(ss, candiesString);
+
+//         stringstream candy_ss(candiesString);
+//         vector<string> characterCandies;
+
+//         for (int i = 0; i < 9; i++)
+//         {
+//             string candy;
+//             getline(candy_ss, candy, ',');
+//             if(candy == "")
+//             {
+//                 break;
+//             }
+//             characterCandies.push_back(candy); 
+//         }
+        
+//         for (int i = 0; i < 9; i+=3)
+//         {
+//             cout << "[" << characterCandies[i] << "]   [" << characterCandies[i+1] << "]   [" << characterCandies[i+2] << "]" << endl;
+//         }
+//         cout << "-----------------------------------------------------------" << endl;
+        
+//     }
+//     infile.close();
+// }
+
 int main()
 {
     //Print map

@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include "Game.h"
-#include "Entity.h"
+// #include "Entity.h"
 
 using namespace std;
 
@@ -188,6 +188,7 @@ int Game::combat(Entity player)
 {
     //regulates gold intake if the enemy is defeated
     //return -1 if a player dies/forfeits
+    return 0;
 }
 
 void Game::shop(Potion all_potions[], Equipment all_equip[])
@@ -294,8 +295,49 @@ int split(string line, char seperator, string words[], const int ARR_SIZE)
 }
 
 /* LOAD CHARACTERS */
-bool loadCharacters(string filename, Entity characters[], const int CHARACTERS_SIZE, char type) // <- changed 'bool is_enemy' to 'char type'
-{
+// bool loadCharacters(string filename, Entity characters[], const int CHARACTERS_SIZE, char type) // <- changed 'bool is_enemy' to 'char type'
+// {
+//     ifstream filein;
+//     string line;
+//     const static int arr_size = 11;
+//     // const static int arr_size2 = 2;
+//     string arr[arr_size];
+//     // string arr2[arr_size2];
+
+//     filein.open(filename);
+
+//     if (!filein.is_open())
+//     {
+//         return false;
+//     }
+
+//     getline(filein, line);
+//     for (int i = 0; i < 4; i++)
+//     {
+//         Entity character_object;
+//         getline(filein, line);
+//         split(line, '|', arr, arr_size);
+//         //bob -> entity.name = arr[0]
+//         character_object.setName(arr[0]);
+//         character_object.setType(arr[1][0]);
+//         character_object.setHP(stod(arr[2]));
+//         character_object.setStamina(stod(arr[3]));
+//         character_object.setDefense(stod(arr[4]));
+//         character_object.setCondition(arr[5][0]);
+//         //temp.setAdvantage(arr[6]);
+//         character_object.setGold(stoi(arr[8]));
+//         character_object.setStartingItems(arr[9]);
+//         character_object.setNumItems(stoi(arr[10]));
+//         // ^^ i don't know why it's fycking flagging my start items and num items
+
+
+//         characters[i] = temp;
+//     }
+
+//     filein.close();
+// }
+
+bool loadCharacters(string filename, Entity characters[], const int CHARACTERS_SIZE, char type) {
     ifstream filein;
     string line;
     const static int arr_size = 11;
@@ -303,34 +345,37 @@ bool loadCharacters(string filename, Entity characters[], const int CHARACTERS_S
 
     filein.open(filename);
 
-    if (!filein.is_open())
-    {
+    if (!filein.is_open()) {
         return false;
     }
 
-    getline(filein, line);
-    for (int i = 0; i < 4; i++)
-    {
-        Entity temp;
-        getline(filein, line);
-        split(line, '|', arr, arr_size);
-        //bob -> entity.name = arr[0]
-        temp.setName(arr[0]);
-        temp.setType(arr[1][0]);
-        temp.setHP(stod(arr[2]));
-        temp.setStamina(stod(arr[3]));
-        temp.setDefense(stod(arr[4]));
-        temp.setCondition(arr[5][0]);
-        //temp.setAdvantage(arr[6]);
-        temp.setGold(stoi(arr[8]));
-        temp.setStartingItems(arr[9]);
-        temp.setNumItems(stoi(arr[10]));
-        // ^^ i don't know why it's fycking flagging my start items and num items 
+    getline(filein, line); // Ignore the header line
 
+    for (int i = 0; i < CHARACTERS_SIZE; i++) {
+        if (!getline(filein, line)) // Read a line from the file
+            break;
 
-        characters[i] = temp;
+        split(line, '|', arr, arr_size); // Split the line by '|'
+
+        Entity character_object;
+
+        // Assign values to the character object
+        character_object.setName(arr[0]);
+        character_object.setType(arr[1][0]);
+        character_object.setHP(stoi(arr[2]));
+        character_object.setStamina(stoi(arr[3]));
+        character_object.setDefense(stoi(arr[4]));
+        character_object.setCondition(arr[5][0]);
+        character_object.setAdvantage(arr[6] == "True");
+        // character_object.setElementalWeakness(arr[7][0]);
+        character_object.setGold(stoi(arr[8]));
+        character_object.setStartingItems(arr[9]);
+        character_object.setNumItems(stoi(arr[10]));
+        // character_object.setUltimate(arr[11]);
+
+        characters[i] = character_object; // Assign the character object to the array
     }
 
     filein.close();
+    return true;
 }
-
