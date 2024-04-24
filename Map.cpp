@@ -136,3 +136,14 @@ void Map::movePlayerPosition(int playerID, int steps)
 {
     _player_position[playerID] += steps;
 }
+
+
+void Map::movePlayer(int playerID) 
+{
+    // Roll a 6-sided die
+    int steps = rand() % 6 + 1; // Generates a random number between 1 and 6 inclusive
+
+    // Move the player
+    movePlayerPosition(playerID, steps);
+}
+
