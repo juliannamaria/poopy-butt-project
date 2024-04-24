@@ -287,21 +287,20 @@ void Game::playGame()
     cout << "Player 2 has selected: " << chosen_one << endl;
     cout << " " << endl;
     cout << "Loading map..." << endl;
-    cout << "-----------------------------" << endl;
+    // cout << "-----------------------------" << endl;
 
     /*PRINT MAP*/
-    //Initialize random seed
-    srand (time(NULL));
+    // Initialize random seed
 
-    Map starterMap = Map(); 
+    // Map starterMap = Map(); 
 
-    //Initialize tiles
-    starterMap.initializeMap();
-    starterMap.displayMap();
+    // //Initialize tiles
+    // starterMap.initializeMap();
+    // starterMap.displayMap();
 
-    cout << "-----------------------------" << endl;
-    cout << "Let's begin!" << endl;
-    cout << " " << endl;
+    // cout << "-----------------------------" << endl;
+    // cout << "Let's begin!" << endl;
+    // cout << " " << endl;
 
 
 
