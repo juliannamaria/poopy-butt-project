@@ -2,10 +2,10 @@
 #define MAP_H
 
 #include <iostream>
+#include <ctime>
 // #include <stdio.h>
 // #include <stdlib.h>
 // #include <time.h>
-#include<ctime>
 
 
 using namespace std;
@@ -49,15 +49,12 @@ class Map
     //move and update player position
     void movePlayerPosition(int playerID, int steps);
 
-    void movePlayer(int playerID);
-
     private:
     //2 for 2 players, 50 for 50 tiles per lane
     string m_mapArr[2][50] = {};
 
     // map positioning for two players 
     int _player_position[2]; // <- remove incase break
-
     
 };
 
