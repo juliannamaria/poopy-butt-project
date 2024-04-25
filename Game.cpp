@@ -12,10 +12,14 @@ Game::Game()
 {
     _num_players = 0;
     // _num_enemies = 0;
+    // all_equip = {};
+    // all_potions = {};
 }
 
 Game::Game(Entity players[], int num_players)
 {
+    // all_equip = {};
+    // all_potions = {};
     if (num_players > 2)
     {
         _num_players = 2;
@@ -287,31 +291,21 @@ void Game::playGame()
     cout << "Player 2 has selected: " << chosen_one << endl;
     cout << " " << endl;
     cout << "Loading map..." << endl;
-    cout << "-----------------------------" << endl;
+    cout << "Let's begin!" << endl;
+    // cout << "-----------------------------" << endl;
 
     /*PRINT MAP*/
-    //Initialize random seed
-    srand (time(NULL));
+    // Initialize random seed
 
-    Map starterMap = Map(); 
+    // Map starterMap = Map(); 
 
-    //Initialize tiles
-    starterMap.initializeMap();
-    starterMap.displayMap();
+    // //Initialize tiles
+    // starterMap.initializeMap();
+    // starterMap.displayMap();
 
-    cout << "-----------------------------" << endl;
-    cout << "Let's begin!" << endl;
-    cout << " " << endl;
-
-    while (!gameEnd())
-    {
-        
-
-    }
-
-
-
-
+    // cout << "-----------------------------" << endl;
+    // cout << "Let's begin!" << endl;
+    // cout << " " << endl;
 
 
 
@@ -357,13 +351,17 @@ void Game::playGame()
 
 
     //call function to load island and epic enemies 
+    cout << "ATTEMPTING TO LOAD CHARACTERS" << endl;
     loadCharacters("myIslandEnemies.txt", _island_enemies, 7);
-
+    
     loadCharacters("myEpicEnemies.txt", _epic_enemies, 3);
+    cout << "DONE LOAD CHARACTERS" << endl;
 
 
+    // while (!gameEnd())
+    // {
 
-
+    // }
 
 }
 
@@ -448,7 +446,8 @@ bool Game::loadCharacters(string filename, Entity characters[], const int CHARAC
     filein.open("myPlayers.txt");
     // ^^ ASK QUESTION
 
-    if (!filein.is_open()) {
+    if (!filein.is_open()) 
+    {
         return false;
     }
 
@@ -489,6 +488,208 @@ bool Game::loadCharacters(string filename, Entity characters[], const int CHARAC
     return true;
 }
 
+/*LOAD ISLAND ENEMIES*/
+bool Game::loadIslandEnemies(string filename, Entity islandEnemies[], const int CHARACTERS_SIZE)
+{
+    ifstream filein;
+    string line;
+    const static int arr_size = 11;
+    string arr[arr_size];
+
+    //?? i think so
+    filein.open("myIslandEnemies.txt");
+
+    if (!filein.is_open()) 
+    {
+        return false;
+    }
+
+    getline(filein, line); // Ignore the header line
+    int i = 0;
+
+    //Iterates through playabale characters and their stats
+    while (getline(filein, line))
+    {
+        //??
+        // if (!getline(filein, line)) // Read a line from the file
+        // break;
+
+        split(line, '|', arr, arr_size); // Split the line by '|'
+
+        Entity islandEnemy_object;
+
+        // Assign values to the character object
+        islandEnemy_object.setName(arr[0]);
+        islandEnemy_object.setType(arr[1][0]);
+        islandEnemy_object.setHP(stoi(arr[2]));
+        islandEnemy_object.setStamina(stoi(arr[3]));
+        islandEnemy_object.setDefense(stoi(arr[4]));
+        islandEnemy_object.setCondition(arr[5][0]);
+        islandEnemy_object.setAdvantage(arr[6] == "True");
+        // character_object.setElementalWeakness(arr[7][0]);
+        islandEnemy_object.setGold(stoi(arr[8]));
+        islandEnemy_object.setStartingItems(arr[9]);
+        islandEnemy_object.setNumItems(stoi(arr[10]));
+        // character_object.setUltimate(arr[11]);
+
+        islandEnemies[i] = islandEnemy_object; // Assign the character object to the array
+
+        i++;
+    }
+    
+    filein.close();
+    return true;
+}
+
+/*LOAD EPIC ENEMIES*/
+bool Game::loadEpicEnemies(string filename, Entity epicEnemies[], const int CHARACTERS_SIZE)
+{
+    ifstream filein;
+    string line;
+    const static int arr_size = 11;
+    string arr[arr_size];
+
+    //?? i think so
+    filein.open("myEpicEnemies.txt");
+
+    if (!filein.is_open()) 
+    {
+        return false;
+    }
+
+    getline(filein, line); // Ignore the header line
+    int i = 0;
+
+    //Iterates through playabale characters and their stats
+    while (getline(filein, line))
+    {
+        //??
+        // if (!getline(filein, line)) // Read a line from the file
+        // break;
+
+        split(line, '|', arr, arr_size); // Split the line by '|'
+
+        Entity epicEnemy_object;
+
+        // Assign values to the character object
+        epicEnemy_object.setName(arr[0]);
+        epicEnemy_object.setType(arr[1][0]);
+        epicEnemy_object.setHP(stoi(arr[2]));
+        epicEnemy_object.setStamina(stoi(arr[3]));
+        epicEnemy_object.setDefense(stoi(arr[4]));
+        epicEnemy_object.setCondition(arr[5][0]);
+        epicEnemy_object.setAdvantage(arr[6] == "True");
+        // character_object.setElementalWeakness(arr[7][0]);
+        epicEnemy_object.setGold(stoi(arr[8]));
+        epicEnemy_object.setStartingItems(arr[9]);
+        epicEnemy_object.setNumItems(stoi(arr[10]));
+        // character_object.setUltimate(arr[11]);
+
+        epicEnemies[i] = epicEnemy_object; // Assign the character object to the array
+
+        i++;
+    }
+    
+    filein.close();
+    return true;
+}
+
+void displayVector(vector <Equipment> poop)
+{
+    int length = poop.size();
+    for(int i = 0; i < length; i++)
+    {
+        cout << poop.at(i).name << " ";
+    }
+    cout << endl;
+}
+
+
+/*LATER*/
+// bool Game::loadItems()
+// {
+//     ifstream filein;
+//     string line;
+//     const static int arr_size = 6;
+//     string arr[arr_size];
+
+//     //?? i think so
+//     filein.open("myItems.txt");
+    
+//     if (!filein.is_open()) 
+//     {
+//         return false;
+//     }
+
+//     getline(filein, line); // Ignore the header line
+//     // int i = 0;
+
+//     //Iterates through playabale characters and their stats
+//     while (getline(filein, line))
+//     {
+//         //??
+//         // if (!getline(filein, line)) // Read a line from the file
+//         // break;
+
+//         split(line, '|', arr, arr_size); // Split the line by '|'
+        
+//         if (arr[2][0] == 'P')
+//         {
+//             cout << "LOADING ITEMS P" << endl;
+//             Potion initial_p;
+//             initial_p.name = arr[0];
+//             initial_p.type = arr[2][0];
+//             initial_p.effect_value = stod(arr[3]);
+//             initial_p.price = stod(arr[5]);
+//             initial_p.descrption = arr[1];
+
+//             all_potions.push_back(initial_p);
+//         }
+
+//         else if (arr[2][0] == 'D' || arr[2][0] == 'S')
+//         {
+//             cout << "LOADING ITEMS D S" << endl;
+//             Equipment initial_e;
+            
+//             initial_e.name = arr[0];
+            
+//             initial_e.type = arr[2][0];
+//             initial_e.effect_value = stod(arr[3]);
+            
+//             initial_e.price = stod(arr[5]);
+//             initial_e.descrption = arr[1];
+            
+//             // all_equip.push_back(initial_e);
+//             cout << "A" << endl;
+//         }
+//         cout << (int)all_equip.size() << endl;
+//         // displayVector(all_equip);
+//         cout << "DISPLAY" << endl;
+//         // Entity items_object;
+
+//         // // Assign values to the character object
+//         // epicEnemy_object.setName(arr[0]);
+//         // epicEnemy_object.setType(arr[1][0]);
+//         // epicEnemy_object.setHP(stoi(arr[2]));
+//         // epicEnemy_object.setStamina(stoi(arr[3]));
+//         // epicEnemy_object.setDefense(stoi(arr[4]));
+//         // epicEnemy_object.setCondition(arr[5][0]);
+//         // epicEnemy_object.setAdvantage(arr[6] == "True");
+//         // // character_object.setElementalWeakness(arr[7][0]);
+//         // epicEnemy_object.setGold(stoi(arr[8]));
+//         // epicEnemy_object.setStartingItems(arr[9]);
+//         // epicEnemy_object.setNumItems(stoi(arr[10]));
+//         // // character_object.setUltimate(arr[11]);
+
+//         // epicEnemies[i] = epicEnemy_object; // Assign the character object to the array
+
+//         // i++;
+//     }
+    
+//     filein.close();
+//     return true;
+// }
+
 int Game::findCharacterIndex(string character_name)
 {
     for(int i = 0; i < _num_characters;i++)
@@ -520,4 +721,27 @@ bool Game::removeCharacter(string character_name)
     _num_characters--;
     return true;
 }
+
+
+// bool Game::loadPotions()
+// {
+
+// }
+
+// bool Game::loadEquip()
+// {
+
+// }
+
+
+// bool Game::getRandomPotion(string potion_name)
+// {
+
+// }
+
+// bool Game::getRandomEquip(string equip_name)
+// {
+
+// }
+
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "Entity.h"
 
 using namespace std;
@@ -36,6 +37,7 @@ class Game
     // Entity getEnemy(string);
     int findPlayer(string);
     int findCharacterIndex(string);
+    bool removeCharacter(string name);
     // int findEnemy(string);
     void printAllStats();
     //added
@@ -46,7 +48,12 @@ class Game
     bool gameEnd();
     bool validateInt(string);
     bool loadCharacters(string filename, Entity characters[], const int); 
-    bool removeCharacter(string name);
+    bool loadIslandEnemies(string filename, Entity islandEnemies[], const int);
+    bool loadEpicEnemies(string filename, Entity epicEnemies[], const int);
+    
+    bool loadItems();
+
+//vectors passed by value
 
 
     private:
@@ -58,15 +65,13 @@ class Game
     Entity _epic_enemies[3];
     // int _num_enemies;
     //added
-    Potion _allPotions[4];
-    Equipment _allEquip[4];
+    // Potion all_potions[4];
+    // Equipment all_equip[4];
     int _num_characters;
     //Entity _possible_characters[4];
 
     //updated
-    // vector <Entity> all_players;
-    // vector <Entity> all_enemies;
-    // vector <Potion> all_potions;
-    // vector <Equipment> all_equipment;
+    vector <Potion> _all_potions;
+    vector <Equipment> _all_equip;
 
 };

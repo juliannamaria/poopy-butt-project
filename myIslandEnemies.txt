@@ -1,3 +1,4 @@
+name|type|hp|stamina|defense|condition|advantage|elemental weakness|gold|starting items|number of items|ultimate
 Sirens|I|150|100|25|H|False|E|25|Lesser Health Potion, Tidal Charm of the Sirens|1,1|none
 Giants|I|170|75|50|H|False|F|35|Lesser Health Potion, Maul of the Giants|1,1|none
 Cicones|I|140|90|20|H|False|E|40|Lesser Health Potion, Ciconian Spear|1,1|none

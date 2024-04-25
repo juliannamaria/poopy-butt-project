@@ -6,19 +6,21 @@ using namespace std;
 struct Potion
 {
     string name;
+    string descrption;
     char type;
     double effect_value;
+    double price;
     int quantity;
 };
 
 struct Equipment
 {
     string name;
+    string descrption;
     char type;
-    char element;
-    double damage;
-    double defense;
+    double effect_value;
     double price;
+    int quantity;
 };
 
 class Entity
@@ -86,3 +88,4 @@ class Entity
     int _num_items;
 
 };
+
