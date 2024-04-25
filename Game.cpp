@@ -14,6 +14,8 @@ Game::Game()
     // _num_enemies = 0;
     // all_equip = {};
     // all_potions = {};
+    // generatePotions();
+    // generateEquip();
 }
 
 Game::Game(Entity players[], int num_players)
@@ -196,9 +198,34 @@ int Game::combat(Entity player)
     return 0;
 }
 
-void Game::shop(Potion all_potions[], Equipment all_equip[])
+void Game::displayShop()
 {
-    //takes in potion and equipment information to randomize shop availability
+    int numPotions = 3;
+    int numEquip = 3;
+    
+    cout << "Welcome to the shop! Here are the available potions and equipment:" << endl;
+    cout << "-----------------------------" << endl;
+    for (int i = 0; i < numPotions && i < _all_potions.size(); i++)
+    {
+        cout << i + 1 << ". " << _all_potions[i].name << endl;
+        cout << "Description: " << _all_potions[i].descrption << endl;
+        cout << "Effect: " << _all_potions[i].effect_value << endl;
+        cout << "Type: " << _all_potions[i].type << endl;
+        cout << "Price: " << _all_potions[i].price << " gold" << endl;
+        cout << " " << endl;
+    }
+    cout << "-----------------------------" << endl;
+    for (int i = 0; i < numEquip && i < _all_equip.size(); i++)
+    {
+        cout << i + 1 << ". " << _all_equip[i].name << endl;
+        cout << "Description: " << _all_equip[i].descrption << endl;
+        cout << "Effect: " << _all_equip[i].effect_value << endl;
+        cout << "Type: " << _all_equip[i].type << endl;
+        cout << "Price: " << _all_equip[i].price << " gold" << endl;
+        cout << " " << endl;
+    }
+    cout << "-----------------------------" << endl;
+
 }
 
 // void Game::loadEntity()
@@ -292,6 +319,8 @@ void Game::playGame()
     cout << " " << endl;
     cout << "Loading map..." << endl;
     cout << "Let's begin!" << endl;
+
+
     // cout << "-----------------------------" << endl;
 
     /*PRINT MAP*/
@@ -306,8 +335,6 @@ void Game::playGame()
     // cout << "-----------------------------" << endl;
     // cout << "Let's begin!" << endl;
     // cout << " " << endl;
-
-
 
     // cout << _characters[0].getName() << "'s Stats:" << endl;
     // cout << "HP: " << _characters[0].getHP() << endl;
@@ -351,11 +378,11 @@ void Game::playGame()
 
 
     //call function to load island and epic enemies 
-    cout << "ATTEMPTING TO LOAD CHARACTERS" << endl;
-    loadCharacters("myIslandEnemies.txt", _island_enemies, 7);
+    // cout << "ATTEMPTING TO LOAD CHARACTERS" << endl;
+    // loadCharacters("myIslandEnemies.txt", _island_enemies, 7);
     
-    loadCharacters("myEpicEnemies.txt", _epic_enemies, 3);
-    cout << "DONE LOAD CHARACTERS" << endl;
+    // loadCharacters("myEpicEnemies.txt", _epic_enemies, 3);
+    // cout << "DONE LOAD CHARACTERS" << endl;
 
 
     // while (!gameEnd())
@@ -743,5 +770,56 @@ bool Game::removeCharacter(string character_name)
 // {
 
 // }
+
+void Game::generatePotions()
+{
+    _all_potions.push_back(Potion {"Lesser Health Potion", "Restore HP by 10", 'P', 10, 25});
+    _all_potions.push_back(Potion {"Greater Health Potion", "Restore HP by 25", 'P', 25, 50});
+    _all_potions.push_back(Potion {"Lesser Stamina Potion", "Restore stamina by 10", 'P', 10, 25});
+    _all_potions.push_back(Potion {"Greater Stamina Potion", "Restore stamina by 25", 'P', 25, 50});
+    _all_potions.push_back(Potion {"Cleansing Potion", "Cleanse player of either Disease or Poison", 'P', 0, 150});
+    _all_potions.push_back(Potion {"Greater Rejuvenation Potion", "Restore HP by 25 and stamina by 25", 'P', 25, 100});
+    _all_potions.push_back(Potion {"Lesser Rejuvenation Potion", "Restore HP by 10 and stamina by 10", 'P', 10, 50});
+    _all_potions.push_back(Potion {"Minor Strength Potion", "Permanently increase weapon damage by 2", 'P', 2, 50});
+    _all_potions.push_back(Potion {"Major Strength Potion", "Permanently increase weapon damage by 5", 'P', 5, 75});
+
+    // shuffles the available potions using rand()
+    int n = _all_potions.size();
+
+    for (int i = n - 1; i > 0; --i) 
+    {
+        int j = rand() % (i + 1);
+        swap(_all_potions[i], _all_potions[j]); //swaps the values of a and b
+    }
+}
+
+void Game::generateEquip()
+{
+    _all_equip.push_back(Equipment {"Bow of Odysseus", "Increases damage by 10", 'D', 10, 100});
+    _all_equip.push_back(Equipment {"Sword of Achilles", "Increases damage by 10", 'D', 10, 100});
+    _all_equip.push_back(Equipment {"Circe's Wand", "Increases damage by 15", 'D', 15, 125});
+    _all_equip.push_back(Equipment {"Argos' Fangs", "Increases damage by 20", 'D', 20, 125});
+    _all_equip.push_back(Equipment {"Helios' Luninous Shield", "Increases defense by 50", 'S', 50, 350});
+    _all_equip.push_back(Equipment {"Trident of Poseidon", "Increases damage by 50", 'D', 50, 350});
+    _all_equip.push_back(Equipment {"Demeter's Harvest Armor", "Increases defense by 25", 'S', 25, 350});
+    _all_equip.push_back(Equipment {"King's Blade", "Increases damage by 60", 'D', 60, 0});
+    _all_equip.push_back(Equipment {"Fangs of Scylla", "Increases damage by 60", 'D', 60, 0});
+    _all_equip.push_back(Equipment {"Cyclops Gaze", "Increases defense by 50", 'S', 50, 0});
+    _all_equip.push_back(Equipment {"Maul of the Giants", "Increases damage by 12", 'D', 10, 75});
+    _all_equip.push_back(Equipment {"Tidal Charm of the Sirens", "Increases damage by 12", 'D', 10, 75});
+    _all_equip.push_back(Equipment {"Ciconian Spear", "Increases damage by 10", 'D', 10, 75});
+    _all_equip.push_back(Equipment {"Lotus Staff", "Increases damage by 10", 'D', 10, 80});
+    _all_equip.push_back(Equipment {"Laestrygonian Club", "Increases damage by 15", 'D', 15, 90});
+    _all_equip.push_back(Equipment {"Enchanted Want", "Increases damage by 10", 'D', 10, 100});
+    
+    // shuffles the available equipment using rand()
+    int n = _all_equip.size();
+
+    for (int i = n - 1; i > 0; --i) 
+    {
+        int j = rand() % (i + 1);
+        swap(_all_equip[i], _all_equip[j]); //swaps the values of a and b
+    }
+}
 
 

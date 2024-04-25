@@ -33,6 +33,10 @@ int main()
     starterMap.initializeMap();
     starterMap.displayMap();
 
+    game.generatePotions();
+    game.generateEquip();
+    game.displayShop(); 
+
     while (end_game == false) 
     {
         cout << "Player X's turn!" << endl;
@@ -117,7 +121,7 @@ int main()
             }
             else if (choice == 2)
             {
-
+                
             }
             else if (choice == 3)
             {

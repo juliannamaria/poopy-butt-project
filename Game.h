@@ -42,7 +42,7 @@ class Game
     void printAllStats();
     //added
     int combat(Entity player);
-    void shop(Potion all_potions[], Equipment all_equip[]);
+    void displayShop();
     //void loadEntity();
     void playGame();
     bool gameEnd();
@@ -51,7 +51,13 @@ class Game
     bool loadIslandEnemies(string filename, Entity islandEnemies[], const int);
     bool loadEpicEnemies(string filename, Entity epicEnemies[], const int);
     
-    bool loadItems();
+    // bool loadPotions(string filename, Potion all_potions[], const int);
+    // bool loadEquip();
+
+    void generatePotions();
+    void generateEquip();
+
+    // bool loadItems();
 
 //vectors passed by value
 
@@ -69,6 +75,7 @@ class Game
     // Equipment all_equip[4];
     int _num_characters;
     //Entity _possible_characters[4];
+    
 
     //updated
     vector <Potion> _all_potions;

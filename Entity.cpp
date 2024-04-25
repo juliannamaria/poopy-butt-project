@@ -241,6 +241,7 @@ void Entity::drop(int userChoice)
 void Entity::usePotion(int userChoice)
 {
     //function call allows user to sort through potion choices and decide which to use
+    
 }
 
 void Entity::updateEquipment(int equipIndex, Equipment weapon)

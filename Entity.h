@@ -10,7 +10,7 @@ struct Potion
     char type;
     double effect_value;
     double price;
-    int quantity;
+    // int quantity;
 };
 
 struct Equipment
@@ -20,7 +20,7 @@ struct Equipment
     char type;
     double effect_value;
     double price;
-    int quantity;
+    // int quantity;
 };
 
 class Entity
