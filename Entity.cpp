@@ -81,8 +81,6 @@ Entity::Entity(string name, double hp, int gold, char condition, char type, doub
         _type = 'E';
     }
 
-    //check stamina 
-    //don't care didn't ask goofy ahh error handling 
 }
 
 string Entity::getName()
@@ -229,7 +227,7 @@ void Entity::printStats()
 
 void Entity::swap(int userChoice)
 {
-    //function call allows user to change weapons or potions depending on the input choice
+
 
 }
 
@@ -241,7 +239,7 @@ void Entity::drop(int userChoice)
 void Entity::usePotion(int userChoice)
 {
     //function call allows user to sort through potion choices and decide which to use
-    
+
 }
 
 void Entity::updateEquipment(int equipIndex, Equipment weapon)

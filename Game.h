@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Entity.h"
+#include "Map.h"
 
 using namespace std;
 
@@ -41,7 +42,8 @@ class Game
     // int findEnemy(string);
     void printAllStats();
     //added
-    int combat(Entity player);
+    int combatIsland(int player_idx, Entity island_enemy);
+    int combatEpic(int player_idx, Entity epic_enemy);
     void displayShop();
     //void loadEntity();
     void playGame();
@@ -50,6 +52,11 @@ class Game
     bool loadCharacters(string filename, Entity characters[], const int); 
     bool loadIslandEnemies(string filename, Entity islandEnemies[], const int);
     bool loadEpicEnemies(string filename, Entity epicEnemies[], const int);
+    // bool getIslandEnemy();
+    // bool getEpicEnemy();
+
+
+
     
     // bool loadPotions(string filename, Potion all_potions[], const int);
     // bool loadEquip();
@@ -74,6 +81,9 @@ class Game
     // Potion all_potions[4];
     // Equipment all_equip[4];
     int _num_characters;
+    int _num_island;
+    int _num_epic;
+    Map _map;
     //Entity _possible_characters[4];
     
 

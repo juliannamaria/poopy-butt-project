@@ -49,7 +49,9 @@ class Map
     //move and update player position
     void movePlayerPosition(int playerID, int steps);
 
-    void movePlayer(int playerID);
+    int movePlayer(int playerID);
+    string getTileColor(int player_idx);
+    
 
     private:
     //2 for 2 players, 50 for 50 tiles per lane

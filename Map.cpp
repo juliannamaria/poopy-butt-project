@@ -1,5 +1,6 @@
 #include "Map.h"
 
+
 #define RED "\033[41m" 
 #define GREEN "\033[42m"
 #define BLUE "\033[44m"
@@ -138,12 +139,80 @@ void Map::movePlayerPosition(int playerID, int steps)
 }
 
 
-void Map::movePlayer(int playerID) 
+int Map::movePlayer(int playerID) 
 {
     // Roll a 6-sided die
     int steps = rand() % 6 + 1; // Generates a random number between 1 and 6 inclusive
-
     // Move the player
-    movePlayerPosition(playerID, steps);
+    // movePlayerPosition(playerID, steps);
+
+    int newPosition;
+    newPosition = _player_position[playerID] + steps;
+    int outcome = 0; 
+
+
+    for (int i = _player_position[playerID] + 1; i < newPosition; i++)
+    {
+        
+        movePlayerPosition(playerID, 1);
+
+        if (getMapPos(playerID, i) == GREEN)
+        {
+            outcome = 1;
+            break;
+
+        }
+        else if (getMapPos(playerID, i) == RED)
+        {
+            outcome = 2;
+            break;
+        }
+        else if (getMapPos(playerID, i) == MAGENTA)
+        {
+            outcome = 3;
+            break;
+        }
+    
+    }
+    return outcome;
+
 }
+
+
+
+
+
+/*INITIAL FUNCTION*/
+// void Map::movePlayer(int playerID)
+// {
+//     // Roll a 6-sided die
+//     int steps = rand() % 6 + 1; // Generates a random number between 1 and 6 inclusive
+
+//     // Move the player
+//     movePlayerPosition(playerID, steps);
+// }
+
+
+
+
+// //returns color of tile that each character lands on
+// string Map::getTileColor(int player_idx)
+// {
+//     string tile;
+//     if (player_idx == 0)
+//     {
+        
+//     }
+
+//     else if (player_idx == 1)
+//     {
+
+//     }
+// }
+
+// bool Map::getPlayerAction()
+// {
+
+// }
+
 

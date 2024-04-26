@@ -17,59 +17,67 @@ int main()
     /*CALL PLAY GAME FUNCTION HERE*/
     srand (time(NULL));
 
-    int choice;
-    bool end_game = false;
-    const int NUM_PLAYERS = 2; // Assuming 2 players
-    bool same_turn = false;
-    int currentPlayer = 0; // To keep track of the current player
+    // int choice;
+    // bool end_game = false;
+    // const int NUM_PLAYERS = 2; // Assuming 2 players
+    // bool same_turn = false;
+    // int currentPlayer = 0; // To keep track of the current player
 
     Game game; 
     game.playGame();
     // game.loadItems();
 
-    Map starterMap = Map(); 
+    // Map starterMap = Map(); 
 
-    //Initialize tiles
-    starterMap.initializeMap();
-    starterMap.displayMap();
+    // //Initialize tiles
+    // starterMap.initializeMap();
+    // starterMap.displayMap();
+    // cout << "-----------------------------" << endl;
 
-    game.generatePotions();
-    game.generateEquip();
-    game.displayShop(); 
+    // cout << "First...let's visit the shop!" << endl;
+    // cout << "-----------------------------" << endl;
+    // game.generatePotions();
+    // game.generateEquip();
+    // game.displayShop(); 
+    // cout << "-----------------------------" << endl;
+    // cout << " " << endl;
+    // cout << "See you at Ithaca, let's begin!" << endl;
 
-    while (end_game == false) 
-    {
-        cout << "Player X's turn!" << endl;
-        cout << "Please enter a valid choice (1, 2, 3, 4, 5)." << endl;
-        cout << "1. Move " << endl;
-        cout << "2. Swap/Drop Weapon" << endl;
-        cout << "3. Use Potion" << endl;
-        cout << "4. Print Player Stats" << endl;
-        cout << "5. Quit" << endl;
+    
+    // while (end_game == false) 
+    // {
+    //     cout << "Player X's turn!" << endl;
+    //     cout << "Please enter a valid choice (1, 2, 3, 4, 5)." << endl;
+    //     cout << "1. Move " << endl;
+    //     cout << "2. Swap/Drop Weapon" << endl;
+    //     cout << "3. Use Potion" << endl;
+    //     cout << "4. Print Player Stats" << endl;
+    //     cout << "5. Quit" << endl;
 
-        //Error handling for menu choice
-        cin >> choice;
-            do
-            {
-                if (choice < 1 || choice > 5) 
-                {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Invalid choice. Please enter a valid number." << endl;
-                    cin >> choice;
-                }
+    //     //Error handling for menu choice
+    //     cin >> choice;
+    //         do
+    //         {
+    //             if (choice < 1 || choice > 5) 
+    //             {
+    //                 cin.clear();
+    //                 cin.ignore(1000, '\n');
+    //                 cout << "Invalid choice. Please enter a valid number." << endl;
+    //                 cin >> choice;
+    //             }
 
-            } while (choice < 1 || choice > 5);
+    //         } while (choice < 1 || choice > 5);
 
-        //Player 1's turn
-        if (currentPlayer == 0)
-        {
-            if (choice == 1)
-            {
-                starterMap.movePlayer((0));
-                starterMap.displayMap();
+        
+    //     //Player 1's turn
+    //     if (currentPlayer == 0)
+    //     {
+    //         if (choice == 1)
+    //         {
+    //             starterMap.movePlayer((0));
+    //             starterMap.displayMap();
 
-                // if ()
+                // if (tile == GREEN)
                 // {
 
                 // }
@@ -90,66 +98,66 @@ int main()
             // end_game = true;
             // break;
         // }
-            }
-            else if (choice == 2)
-            {
+    //         }
+    //         else if (choice == 2)
+    //         {
 
-            }
-            else if (choice == 3)
-            {
+    //         }
+    //         else if (choice == 3)
+    //         {
 
-            }
-            else if (choice == 4)
-            {
+    //         }
+    //         else if (choice == 4)
+    //         {
 
-            }
-            else if (choice == 5)
-            {
-                cout << "You have chosen to quit the game, goodbye Player 1." << endl;
-                cout << "Now leaving...THE ODYSSEY" << endl;
-                return 0;
-            }
-        }
+    //         }
+    //         else if (choice == 5)
+    //         {
+    //             cout << "You have chosen to quit the game, goodbye Player 1." << endl;
+    //             cout << "Now leaving...THE ODYSSEY" << endl;
+    //             return 0;
+    //         }
+    //     }
 
-        //Player 2's turn
-        if (currentPlayer == 1)
-        {
-            if (choice == 1)
-            {
-                starterMap.movePlayer((1));
-                starterMap.displayMap();
-            }
-            else if (choice == 2)
-            {
-                
-            }
-            else if (choice == 3)
-            {
+    //     //Player 2's turn
+    //     if (currentPlayer == 1)
+    //     {
+    //         if (choice == 1)
+    //         {
+    //             starterMap.movePlayer((1));
+    //             starterMap.displayMap();
+    //         }
+    //         else if (choice == 2)
+    //         {
 
-            }
-            else if (choice == 4)
-            {
+    //         }
+    //         else if (choice == 3)
+    //         {
 
-            }
-            else if (choice == 5)
-            {
-                cout << "You have chosen to quit the game, goodbye Player 2." << endl;
-                cout << "Now leaving...THE ODYSSEY" << endl;
-                return 0;
-            }
-        }
+    //         }
+    //         else if (choice == 4)
+    //         {
 
-        //Statement for player turn ending and going to next player
-        if (same_turn)
-        {
-            currentPlayer = (currentPlayer + 2) % NUM_PLAYERS; // keeps same turn
-        }
-        else
-        {
-            currentPlayer = (currentPlayer + 1) % NUM_PLAYERS; // Move to the next player after the turn
-        }
+    //         }
+    //         else if (choice == 5)
+    //         {
+    //             cout << "You have chosen to quit the game, goodbye Player 2." << endl;
+    //             cout << "Now leaving...THE ODYSSEY" << endl;
+    //             return 0;
+    //         }
+    //     }
+
+    //     //Statement for player turn ending and going to next player
+    //     if (same_turn)
+    //     {
+    //         currentPlayer = (currentPlayer + 2) % NUM_PLAYERS; // keeps same turn
+    //     }
+    //     else
+    //     {
+    //         currentPlayer = (currentPlayer + 1) % NUM_PLAYERS; // Move to the next player after the turn
+    //     }
     
-    }
+    // }
     // /*PRINT MAP*/
     // //Initialize random seed
     // srand (time(NULL));

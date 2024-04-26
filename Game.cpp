@@ -191,18 +191,60 @@ void Game::printAllStats()
     // }
 }
 
-int Game::combat(Entity player)
+int Game::combatIsland(int player_idx, Entity island_enemy)
 {
-    //regulates gold intake if the enemy is defeated
-    //return -1 if a player dies/forfeits
-    return 0;
+    string choice;
+    cout << "Uh oh! You have run into an Island Enemy!" << endl;
+    cout << "Let's make haste! What would you like to do? (Select 1, 2, 3)." << endl;
+    cout << "1. Fight!" << endl;
+    cout << "2. Use Potion!" << endl;
+    cout << "3. Run away!" << endl;
+    cout << "4. Meow :3" << endl;
+
+
+    getline(cin, choice);
+
+
+
+
+    if (choice == "1")
+    {
+
+    }
+    if (choice == "2")
+    {
+        
+    }
+    if (choice == "3")
+    {
+
+    }
+    if (choice == "4")
+    {
+
+    }
+}
+
+int Game::combatEpic(int player_idx, Entity island_enemy)
+{
+    string choice; 
+    cout << "Uh oh! You have run into an Epic Enemy!" << endl;
+    cout << "Let's make haste! What would you like to do? (Select 1, 2, 3)." << endl;
+    cout << "1. Fight!" << endl;
+    cout << "2. Use Potion!" << endl;
+    cout << "3. Run away!" << endl;
+    cout << "4. Meow :3" << endl;
+
+    getline(cin, choice);
+
+    
 }
 
 void Game::displayShop()
 {
     int numPotions = 3;
     int numEquip = 3;
-    
+
     cout << "Welcome to the shop! Here are the available potions and equipment:" << endl;
     cout << "-----------------------------" << endl;
     for (int i = 0; i < numPotions && i < _all_potions.size(); i++)
@@ -225,6 +267,60 @@ void Game::displayShop()
         cout << " " << endl;
     }
     cout << "-----------------------------" << endl;
+    
+    //Prompting player 1 for choice
+    string choice;
+    cout << "Player 1, what would you like to do? (Select 1, 2, or 3)" << endl;
+    cout << "1. Buy Weapon" << endl;
+    cout << "2. Buy Potion" << endl;
+    cout << "3. Leave Shop" << endl;
+    getline(cin, choice);
+
+    if (choice == "1")
+    {
+        
+    }
+    else if (choice == "2")
+    {
+
+    }
+    else if (choice == "3")
+    {
+        cout << "You are now leaving the shop..." << endl;
+
+    }
+
+    //Prompting player 2 for choice
+    cout << "Player 2, what would you like to do? (Select 1, 2, or 3)" << endl;
+    cout << "1. Buy Weapon" << endl;
+    cout << "2. Buy Potion" << endl;
+    cout << "3. Leave Shop" << endl;
+    getline(cin, choice);
+    
+    if (choice == "1")
+    {
+        
+    }
+    else if (choice == "2")
+    {
+
+    }
+    else if (choice == "3")
+    {
+        cout << "You are now leaving the shop..." << endl;
+        
+    }
+
+
+
+    // if (choice == 1)
+    // {
+
+    // }
+
+
+
+
 
 }
 
@@ -262,6 +358,15 @@ void Game::displayShop()
 
 void Game::playGame() 
 {
+    //initialize all variables
+    int currentPlayer = 0;
+    int choice;
+    int outcome;
+    bool end_game = false;
+    bool same_turn = false;
+    const int NUM_PLAYERS = 2;
+
+
     cout << "-----------------------------" << endl;
     cout << "WELCOME TO THE ODYSSEY!" << endl;
     cout << "-----------------------------" << endl;
@@ -271,6 +376,14 @@ void Game::playGame()
     //Call function to load playable characters
     loadCharacters("myPlayers.txt", _characters, 4);
     _num_characters = 4;
+    
+    //Call function to load Island Enemies
+    loadIslandEnemies("myIslandEnemies.txt", _island_enemies, 7);
+    _num_island = 7;
+
+    //Call function to load Epic Enemies
+    loadEpicEnemies("myEpicEnemies.txt", _epic_enemies, 3);
+    _num_epic = 3;
 
     // Print character choices
     for(int i = 0; i < _num_characters; i++)
@@ -318,8 +431,175 @@ void Game::playGame()
     cout << "Player 2 has selected: " << chosen_one << endl;
     cout << " " << endl;
     cout << "Loading map..." << endl;
-    cout << "Let's begin!" << endl;
+    cout << "-----------------------------" << endl;
+    
+    //START CHANGES HERE
+    _map.initializeMap();
+    _map.displayMap();
 
+    cout << "First...let's visit the shop!" << endl;
+    cout << "-----------------------------" << endl;
+    // game.generatePotions();
+    // game.generateEquip();
+    // game.displayShop(); 
+    // cout << "-----------------------------" << endl;
+    // cout << " " << endl;
+    // cout << "See you at Ithaca, let's begin!" << endl;
+    generatePotions();
+    generateEquip();
+    displayShop(); 
+
+    cout << "-----------------------------" << endl;
+    cout << " " << endl;
+    cout << "See you at Ithaca, let's begin!" << endl;
+
+    
+
+    while (end_game == false) 
+    {
+        cout << "Player X's turn!" << endl;
+        cout << "Please enter a valid choice (1, 2, 3, 4, 5)." << endl;
+        cout << "1. Move " << endl;
+        cout << "2. Swap/Drop Weapon" << endl;
+        cout << "3. Use Potion" << endl;
+        cout << "4. Print Player Stats" << endl;
+        cout << "5. Quit" << endl;
+
+        //Error handling for menu choice
+        cin >> choice;
+            do
+            {
+                if (choice < 1 || choice > 5) 
+                {
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    cout << "Invalid choice. Please enter a valid number." << endl;
+                    cin >> choice;
+                }
+
+            } while (choice < 1 || choice > 5);
+
+        
+        //Player 1's turn
+        if (currentPlayer == 0)
+        {
+            if (choice == 1)
+            {
+                
+                outcome = _map.movePlayer((0));
+                _map.displayMap();
+                
+                if (outcome == 1)
+                {
+                    cout << "You have landed on an island tile! Time to fight an island enemy!" << endl;
+                }
+                else if (outcome == 2)
+                {
+                    cout << "You have landed on an epic tile! Time to fight an epic enemy!" << endl;
+                }
+                else if (outcome == 3)
+                {
+                    gameEnd();
+                    end_game = true; 
+                }
+
+                // if (tile == GREEN)
+                // {
+
+                // }
+
+        // if (players[0].getPosition() >= 82) 
+        // {
+            //figure out how to use getname function
+            //from my driver file
+            // cout << players[currentPlayer].getName() << " wins! Hooray!" << endl;
+            // cout << "-----------------------------------" << endl;
+            // cout << "Here are your final stats: " << endl;
+            // cout << "Player name: " << players[0].getName() << endl; 
+            // cout << "Character: " << players[0].getChosenCharacter() << endl;
+            // cout << "Stamina: " << players[0].getStamina() << endl;
+            // cout << "Gold: " << players[0].getGold() << endl;
+            // cout << "-----------------------------------" << endl;
+            // displayMainMenu = false;
+            // end_game = true;
+            // break;
+        // }
+            }
+            else if (choice == 2)
+            {
+
+            }
+            else if (choice == 3)
+            {
+
+            }
+            else if (choice == 4)
+            {
+
+            }
+            else if (choice == 5)
+            {
+                cout << "You have chosen to quit the game, goodbye Player 1." << endl;
+                cout << "Now leaving...THE ODYSSEY" << endl;
+                end_game = true;
+            }
+        }
+
+        //Player 2's turn
+        if (currentPlayer == 1)
+        {
+            if (choice == 1)
+            {
+                outcome = _map.movePlayer((1));
+                _map.displayMap();
+                
+                if (outcome == 1)
+                {
+                    cout << "You have landed on an island tile! Time to fight an island enemy!" << endl;
+                    // _enemy[enemy]
+
+                }
+                else if (outcome == 2)
+                {
+                    cout << "You have landed on an epic tile! Time to fight an epic enemy!" << endl;
+                }
+                else if (outcome == 3)
+                {
+                    gameEnd();
+                    end_game = true; 
+                }
+            }
+            else if (choice == 2)
+            {
+
+            }
+            else if (choice == 3)
+            {
+
+            }
+            else if (choice == 4)
+            {
+
+            }
+            else if (choice == 5)
+            {
+                cout << "You have chosen to quit the game, goodbye Player 2." << endl;
+                cout << "Now leaving...THE ODYSSEY" << endl;
+                end_game = true;
+            }
+        }
+
+        //Statement for player turn ending and going to next player
+        if (same_turn)
+        {
+            currentPlayer = (currentPlayer + 2) % NUM_PLAYERS; // keeps same turn
+        }
+        else
+        {
+            currentPlayer = (currentPlayer + 1) % NUM_PLAYERS; // Move to the next player after the turn
+        }
+    
+    }
 
     // cout << "-----------------------------" << endl;
 
@@ -492,6 +772,11 @@ bool Game::loadCharacters(string filename, Entity characters[], const int CHARAC
 
         Entity character_object;
 
+        if (i >= CHARACTERS_SIZE)
+        {
+            break;
+        }
+
         // Assign values to the character object
         character_object.setName(arr[0]);
         character_object.setType(arr[1][0]);
@@ -621,15 +906,15 @@ bool Game::loadEpicEnemies(string filename, Entity epicEnemies[], const int CHAR
     return true;
 }
 
-void displayVector(vector <Equipment> poop)
-{
-    int length = poop.size();
-    for(int i = 0; i < length; i++)
-    {
-        cout << poop.at(i).name << " ";
-    }
-    cout << endl;
-}
+// void displayVector(vector <Equipment> poop)
+// {
+//     int length = poop.size();
+//     for(int i = 0; i < length; i++)
+//     {
+//         cout << poop.at(i).name << " ";
+//     }
+//     cout << endl;
+// }
 
 
 /*LATER*/
@@ -822,4 +1107,15 @@ void Game::generateEquip()
     }
 }
 
+// bool Game::getIslandEnemy()
+// {
 
+
+
+
+// }
+
+// bool Game::getEpicEnemy()
+// {
+    
+// }

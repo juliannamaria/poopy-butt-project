@@ -23,6 +23,8 @@ struct Equipment
     // int quantity;
 };
 
+
+
 class Entity
 {
     public:
